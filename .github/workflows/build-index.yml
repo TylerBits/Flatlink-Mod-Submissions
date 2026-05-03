@@ -15,20 +15,58 @@ jobs:
 
       - name: Generate submissions-index.json
         run: |
-          echo '[' > submissions-index.json
-          first=true
-          for dir in Core/*/; do
-            slug=$(basename "$dir")
-            if [ -f "${dir}game.json" ]; then
-              if [ "$first" = true ]; then
-                first=false
-              else
-                echo ',' >> submissions-index.json
-              fi
-              echo "  {\"id\":\"$slug\",$(cat "${dir}game.json" | tr -d '\n' | sed 's/^[ \t]*{//')" >> submissions-index.json
-            fi
-          done
-          echo ']' >> submissions-index.json
+          node - <<'EOF'
+          const fs = require('fs')
+          const path = require('path')
+
+          const dir = 'submissions'
+          if (!fs.existsSync(dir)) {
+            fs.writeFileSync('submissions-index.json', '[]')
+            process.exit(0)
+          }
+
+          const entries = []
+          for (const file of fs.readdirSync(dir)) {
+            if (!file.endsWith('.json')) continue
+            try {
+              const raw = fs.readFileSync(path.join(dir, file), 'utf8')
+              const data = JSON.parse(raw)
+
+              // Normalize field names from form submissions
+              const id = data.id || data.gameId
+              const name = data.name || data.title
+              if (!id || !name) continue
+
+              const quality = (data.quality || 'playable').toLowerCase()
+              const normalized = {
+                id,
+                name,
+                modName: data.modName || data.modname,
+                modAuthor: data.modAuthor || data.author,
+                modVersion: data.modVersion,
+                steamAppId: data.steamAppId,
+                steamFolder: data.steamFolder,
+                genres: data.genres || [],
+                tags: data.tags || [],
+                quality: ['excellent','good','playable'].includes(quality) ? quality : 'playable',
+                description: data.description || data.shortDescription,
+                infoUrl: data.infoUrl,
+                downloadUrl: data.downloadUrl,
+                installSteps: data.installSteps || [],
+              }
+              // Strip undefined fields
+              Object.keys(normalized).forEach(k => {
+                if (normalized[k] === undefined || normalized[k] === null) delete normalized[k]
+              })
+              entries.push(normalized)
+            } catch (e) {
+              console.error(`Skipping ${file}: ${e.message}`)
+            }
+          }
+
+          fs.writeFileSync('submissions-index.json', JSON.stringify(entries, null, 2))
+          console.log(`Wrote ${entries.length} entries to submissions-index.json`)
+          EOF
 
       - name: Commit updated index
         run: |

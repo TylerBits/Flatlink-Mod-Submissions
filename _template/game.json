@@ -1,0 +1,36 @@
+{
+  "id": "",
+  "name": "",
+  "modName": "",
+  "modAuthor": "",
+  "modVersion": "",
+  "steamAppId": null,
+  "steamFolder": "",
+  "platform": "steam",
+  "genres": [],
+  "tags": [],
+  "quality": "",
+  "description": "",
+  "infoUrl": "",
+  "modFile": "",
+  "installSteps": [
+    {
+      "type": "detect",
+      "steamFolder": "",
+      "fallbackPaths": []
+    },
+    {
+      "type": "download",
+      "url": "",
+      "filename": "",
+      "label": ""
+    },
+    {
+      "type": "extract"
+    },
+    {
+      "type": "verify",
+      "paths": []
+    }
+  ]
+}

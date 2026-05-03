@@ -1,2 +1,46 @@
 [
+  {
+    "id": "bomb-rush-cyberfunk-vr",
+    "name": "Bomb Rush Cyberfunk VR",
+    "modAuthor": "Astienth",
+    "modVersion": "1.0.0",
+    "steamAppId": 1353230,
+    "steamFolder": "Bomb Rush Cyberfunk",
+    "genres": [],
+    "tags": [
+      "action",
+      "vr",
+      "bomb rush cyberfunk"
+    ],
+    "quality": "excellent",
+    "description": "Bomb Rush Cyberfunk VR mod by Astienth. Supports third-person (gamepad) and first-person (VR controllers). First-person mode enables VR hand tracking and full immersive head movements.",
+    "downloadUrl": "https://github.com/Astienth/Bomb_Rush_Cyberfunk_VR/releases/download/1.0.0/BombRushCyberFunk_VR.zip",
+    "installSteps": [
+      {
+        "type": "download",
+        "url": "https://github.com/Astienth/Bomb_Rush_Cyberfunk_VR/releases/download/1.0.0/BombRushCyberFunk_VR.zip"
+      },
+      {
+        "type": "extract",
+        "to": "gameRoot"
+      },
+      {
+        "type": "verify",
+        "files": [
+          "BepInEx/plugins/BombRushCyberFunk_VR.dll"
+        ]
+      },
+      {
+        "type": "shortcut",
+        "target": "Bomb Rush Cyberfunk.exe"
+      },
+      {
+        "type": "message",
+        "title": "First‑Person Setup",
+        "body": [
+          "Edit BepInEx/config/BombRushCyberFunk_VR.cfg and set firstPerson = true for VR controllers."
+        ]
+      }
+    ]
+  }
 ]

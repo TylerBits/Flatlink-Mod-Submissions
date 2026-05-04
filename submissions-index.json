@@ -42,5 +42,18 @@
         ]
       }
     ]
+  },
+  {
+    "id": "road-redemption",
+    "name": "Road Redemption",
+    "modAuthor": "plugin",
+    "modVersion": "0.0.1",
+    "steamAppId": "300380",
+    "genres": [],
+    "tags": [],
+    "quality": "good",
+    "description": "Test",
+    "downloadUrl": "https://github.com/Astienth/Road_Redemption_VR_bHaptics/releases/download/1.0/RoadRedemptionVR.zip",
+    "installSteps": []
   }
 ]

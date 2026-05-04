@@ -1,0 +1,16 @@
+{
+  "gameId": "road-redemption",
+  "title": "Road Redemption",
+  "shortDescription": "Test",
+  "steamAppId": "300380",
+  "controls": "BOTH",
+  "quality": "Good",
+  "modAuthor": "plugin",
+  "modVersion": "0.0.1",
+  "downloadUrl": "https://github.com/Astienth/Road_Redemption_VR_bHaptics/releases/download/1.0/RoadRedemptionVR.zip",
+  "installSteps": [],
+  "dependencies": [],
+  "postInstall": "",
+  "shortcut": false,
+  "tags": []
+}
